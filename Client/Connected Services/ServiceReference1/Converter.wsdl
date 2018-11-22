@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.dataconverter.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.dataconverter.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.dataconverter.com/">
+      <s:element name="ConvertTemperatureFromCelsiusToFahrenheit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="temperature" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConvertTemperatureFromCelsiusToFahrenheitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ConvertTemperatureFromCelsiusToFahrenheitResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConvertTemperatureFromCelsiusToFahrenheitSoapIn">
+    <wsdl:part name="parameters" element="tns:ConvertTemperatureFromCelsiusToFahrenheit" />
+  </wsdl:message>
+  <wsdl:message name="ConvertTemperatureFromCelsiusToFahrenheitSoapOut">
+    <wsdl:part name="parameters" element="tns:ConvertTemperatureFromCelsiusToFahrenheitResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ConverterSoap">
+    <wsdl:operation name="ConvertTemperatureFromCelsiusToFahrenheit">
+      <wsdl:input message="tns:ConvertTemperatureFromCelsiusToFahrenheitSoapIn" />
+      <wsdl:output message="tns:ConvertTemperatureFromCelsiusToFahrenheitSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConverterSoap" type="tns:ConverterSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConvertTemperatureFromCelsiusToFahrenheit">
+      <soap:operation soapAction="http://www.dataconverter.com/ConvertTemperatureFromCelsiusToFahrenheit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConverterSoap12" type="tns:ConverterSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConvertTemperatureFromCelsiusToFahrenheit">
+      <soap12:operation soapAction="http://www.dataconverter.com/ConvertTemperatureFromCelsiusToFahrenheit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Converter">
+    <wsdl:port name="ConverterSoap" binding="tns:ConverterSoap">
+      <soap:address location="http://localhost:11904/Converter.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConverterSoap12" binding="tns:ConverterSoap12">
+      <soap12:address location="http://localhost:11904/Converter.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
