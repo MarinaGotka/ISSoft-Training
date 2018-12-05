@@ -3,21 +3,36 @@ using WebServiceTask;
 
 namespace ConsoleClient
 {
+    /// <summary>
+    /// Class for clients working with web service 
+    /// </summary>
     class Client
     {
         static void Main(string[] args)
         {
             try
             {
-                Console.WriteLine("Enter the initial system measurement: ");
-                string systemFrom = Console.ReadLine();
-                Console.WriteLine("Enter the final system measurement: ");
-                string systemTo = Console.ReadLine();
-                Console.WriteLine("Enter the value to convert: ");
-                string value = Console.ReadLine();
-
+                string key;
                 Converter webServiceConverter = new Converter();
-                Console.WriteLine("\n{0} {1} = {2} {3}",value, systemFrom,webServiceConverter.Conveter(systemFrom, systemTo, value),systemTo);
+
+                do
+                {
+                    Console.WriteLine("Enter the initial system measurement: ");
+                    string systemFrom = Console.ReadLine();
+                    Console.WriteLine("Enter the final system measurement: ");
+                    string systemTo = Console.ReadLine();
+                    Console.WriteLine("Enter the value to convert: ");
+                    string value = Console.ReadLine();
+
+                    webServiceConverter.Conveter(systemFrom, systemTo, value);
+
+                    Console.WriteLine("For adding data enter 1:  ");
+                    key = Console.ReadLine();
+                }
+                while (key == "1");
+
+                Console.WriteLine(webServiceConverter.ShowResults());
+               
             }
             catch (Exception ex)
             {

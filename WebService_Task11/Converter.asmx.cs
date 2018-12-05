@@ -1,4 +1,6 @@
-﻿using System.Web.Services;
+﻿using System.Collections.Generic;
+using System.Text;
+using System.Web.Services;
 
 namespace WebServiceTask
 {
@@ -10,6 +12,8 @@ namespace WebServiceTask
     [System.ComponentModel.ToolboxItem(false)]
     public class Converter : WebService
     {
+        List<ICommand> commandList = new List<ICommand>();
+
         public Converter()
         {
         }
@@ -21,11 +25,30 @@ namespace WebServiceTask
         /// <param name="systemTo"></param>
         /// <param name="value"></param>
         /// <returns></returns>
+
         [WebMethod()]
-        public string Conveter(string systemFrom, string systemTo, string value)
+        public bool Conveter(string systemFrom, string systemTo, string value)
         {
             IConvert converter = Factory.Create(systemFrom);
-            return converter.ConvertTo(systemFrom, systemTo, value).ToString();
+            ConverterCommand command = new ConverterCommand(converter, systemFrom, systemTo, value);
+            commandList.Add(command);
+
+            return true;
+        }
+
+        /// <summary>
+        /// Method to show results of command list
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod()]
+        public string ShowResults()
+        {
+           StringBuilder results = new StringBuilder();
+            foreach (ConverterCommand command in commandList)
+            {
+                results.Append(command.value + " " + command.systemFrom + " = " + command.Execute() + " " + command.systemTo+ "\n");
+            }
+            return results.ToString();
         }
     }
 }
