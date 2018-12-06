@@ -32,7 +32,6 @@ namespace WebServiceTask
             IConvert converter = Factory.Create(systemFrom);
             ConverterCommand command = new ConverterCommand(converter, systemFrom, systemTo, value);
             commandList.Add(command);
-
             return true;
         }
 
@@ -48,6 +47,7 @@ namespace WebServiceTask
             {
                 results.Append(command.value + " " + command.systemFrom + " = " + command.Execute() + " " + command.systemTo+ "\n");
             }
+
             commandList.Clear();
             return results.ToString();
         }

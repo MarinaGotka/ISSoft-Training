@@ -8,31 +8,38 @@ namespace ConsoleClient
     /// </summary>
     class Client
     {
+        public delegate string Result();
+        public event Result EventGetResult;
+
         static void Main(string[] args)
         {
             try
-            {
-                string key;
+            { 
                 Converter webServiceConverter = new Converter();
+                string key;
 
-                do
+                Result result = webServiceConverter.ShowResults;
+
+                while (true)
                 {
-                    Console.WriteLine("Enter the initial system measurement: ");
-                    string systemFrom = Console.ReadLine();
-                    Console.WriteLine("Enter the final system measurement: ");
-                    string systemTo = Console.ReadLine();
-                    Console.WriteLine("Enter the value to convert: ");
-                    string value = Console.ReadLine();
-
-                    webServiceConverter.Conveter(systemFrom, systemTo, value);
-
                     Console.WriteLine("For adding data enter 1, for displaying all results enter another character:  ");
                     key = Console.ReadLine();
+                    if (key.Equals("1"))
+                    {
+                        Console.WriteLine("Enter the initial system measurement: ");
+                        string systemFrom = Console.ReadLine();
+                        Console.WriteLine("Enter the final system measurement: ");
+                        string systemTo = Console.ReadLine();
+                        Console.WriteLine("Enter the value to convert: ");
+                        string value = Console.ReadLine();
+                        webServiceConverter.Conveter(systemFrom, systemTo, value);
+                    }
+                    else
+                    {
+                        Console.WriteLine(result);
+                        break;
+                    }
                 }
-                while (key == "1");
-
-                Console.WriteLine(webServiceConverter.ShowResults());
-               
             }
             catch (Exception ex)
             {
