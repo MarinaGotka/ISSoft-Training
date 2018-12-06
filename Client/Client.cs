@@ -26,7 +26,7 @@ namespace ConsoleClient
 
                     webServiceConverter.Conveter(systemFrom, systemTo, value);
 
-                    Console.WriteLine("For adding data enter 1:  ");
+                    Console.WriteLine("For adding data enter 1, for displaying all results enter another character:  ");
                     key = Console.ReadLine();
                 }
                 while (key == "1");

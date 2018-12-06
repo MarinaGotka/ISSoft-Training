@@ -43,11 +43,12 @@ namespace WebServiceTask
         [WebMethod()]
         public string ShowResults()
         {
-           StringBuilder results = new StringBuilder();
+           StringBuilder results = new StringBuilder().Clear();
             foreach (ConverterCommand command in commandList)
             {
                 results.Append(command.value + " " + command.systemFrom + " = " + command.Execute() + " " + command.systemTo+ "\n");
             }
+            commandList.Clear();
             return results.ToString();
         }
     }
