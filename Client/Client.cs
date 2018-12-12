@@ -8,17 +8,12 @@ namespace ConsoleClient
     /// </summary>
     class Client
     {
-        public delegate string Result();
-        public event Result EventGetResult;
-
         static void Main(string[] args)
         {
             try
             { 
                 Converter webServiceConverter = new Converter();
                 string key;
-
-                Result result = webServiceConverter.ShowResults;
 
                 while (true)
                 {
@@ -32,11 +27,11 @@ namespace ConsoleClient
                         string systemTo = Console.ReadLine();
                         Console.WriteLine("Enter the value to convert: ");
                         string value = Console.ReadLine();
-                        webServiceConverter.Conveter(systemFrom, systemTo, value);
+                        SendCommand(webServiceConverter, systemFrom, systemTo, value);
                     }
                     else
                     {
-                        Console.WriteLine(result);
+                        Console.WriteLine(GetResult(webServiceConverter));
                         break;
                     }
                 }
@@ -45,6 +40,16 @@ namespace ConsoleClient
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public static bool SendCommand(Converter webServiceConverter, string systemFrom, string systemTo, string value)
+        {
+           return webServiceConverter.Conveter(systemFrom, systemTo, value);
+        }
+
+        public static string GetResult(Converter webServiceConverter)
+        {
+            return webServiceConverter.ShowResults();
         }
     }
 }

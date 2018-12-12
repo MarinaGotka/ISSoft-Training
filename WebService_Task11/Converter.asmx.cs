@@ -12,6 +12,9 @@ namespace WebServiceTask
     [System.ComponentModel.ToolboxItem(false)]
     public class Converter : WebService
     {
+        public delegate string Result();
+        public event Result EventSendCommand;
+
         List<ICommand> commandList = new List<ICommand>();
 
         public Converter()
@@ -25,14 +28,22 @@ namespace WebServiceTask
         /// <param name="systemTo"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-
         [WebMethod()]
         public bool Conveter(string systemFrom, string systemTo, string value)
         {
-            IConvert converter = Factory.Create(systemFrom);
-            ConverterCommand command = new ConverterCommand(converter, systemFrom, systemTo, value);
-            commandList.Add(command);
+            if (EventSendCommand == null)
+            {
+                IConvert converter = Factory.Create(systemFrom);
+                ConverterCommand command = new ConverterCommand(converter, systemFrom, systemTo, value);
+                commandList.Add(command);
+            }
+            else
+            {
+                EventSendCommand();
+            }
+
             return true;
+
         }
 
         /// <summary>
@@ -42,10 +53,13 @@ namespace WebServiceTask
         [WebMethod()]
         public string ShowResults()
         {
-           StringBuilder results = new StringBuilder().Clear();
+            EventSendCommand += ShowResults;
+            
+            StringBuilder results = new StringBuilder().Clear();
+
             foreach (ConverterCommand command in commandList)
             {
-                results.Append(command.value + " " + command.systemFrom + " = " + command.Execute() + " " + command.systemTo+ "\n");
+                results.Append(command.value + " " + command.systemFrom + " = " + command.Execute() + " " + command.systemTo + "\n");
             }
 
             commandList.Clear();
