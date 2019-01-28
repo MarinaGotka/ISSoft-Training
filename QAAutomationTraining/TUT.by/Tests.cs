@@ -6,6 +6,10 @@ namespace TUT.by
     [TestFixture]
     public class Tests
     {
+        private readonly string Username = "seleniumtests@tut.by";
+        private readonly string Password = "123456789zxcvbn";
+        private readonly string UserNameAfterLogin = "Selenium Test";
+
         [SetUp]
         public void Init()
         {
@@ -20,16 +24,12 @@ namespace TUT.by
         }
 
         [Test]
-        public void LoginTutBy()
+        public void LoginTutByTest()
         {
-            string username = "seleniumtests@tut.by";
-            string password = "123456789zxcvbn";
-            string userNameAfterLogin = "Selenium Test";
-
             HomePage.LogInClick();
-            LoginPopUp.Login(username, password);
+            LoginPopUp.Login(Username, Password);
 
-            Assert.True(LoginPopUp.LoginAs(userNameAfterLogin));
+            Assert.True(LoginPopUp.LoginAs(UserNameAfterLogin));
         }
     }
 }
