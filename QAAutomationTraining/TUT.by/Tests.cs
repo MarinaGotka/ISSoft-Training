@@ -29,7 +29,7 @@ namespace TUT.by
             HomePage.LogInClick();
             LoginPopUp.Login(Username, Password);
 
-            Assert.True(LoginPopUp.LoginAs(UserNameAfterLogin));
+            Assert.True(LoginPopUp.LoginAs(UserNameAfterLogin), "Username after login is wrong.");
         }
     }
 }
