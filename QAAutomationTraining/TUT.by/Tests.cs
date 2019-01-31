@@ -1,35 +1,44 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Internal;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+using System.Threading;
 
 namespace TUT.by
 {
     [TestFixture]
     public class Tests
     {
-        private readonly string Username = "seleniumtests@tut.by";
-        private readonly string Password = "123456789zxcvbn";
         private readonly string UserNameAfterLogin = "Selenium Test";
+        private IWebDriver driver;
 
         [SetUp]
-        public void Init()
+        public void SetUp()
         {
-            HomePage.GoToUrl("https://www.tut.by/");
+            driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://www.tut.by/");
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
         }
 
         [TearDown]
-        public void Dispose()
+        public void TearDown()
         {
-            LoginPopUp.Logout();
-            HomePage.driver.Close();
+            driver.Quit();
         }
 
-        [Test]
-        public void LoginTutByTest()
+        [TestCase("seleniumtests@tut.by", "123456789zxcvbn")]
+        [TestCase("seleniumtests2@tut.by", "123456789zxcvbn")]
+        public void LoginTutByTest(string username, string password)
         {
-            HomePage.LogInClick();
-            LoginPopUp.Login(Username, Password);
+            HomePage homePage = new HomePage(driver);
+            LoginPopUp loginPopUp = new LoginPopUp(driver);
 
-            Assert.True(LoginPopUp.LoginAs(UserNameAfterLogin), "Username after login is wrong.");
+            homePage.LogInClick();
+            Thread.Sleep(1000); // Explicit wait
+            loginPopUp.Login(username, password);
+
+            Assert.True(loginPopUp.LoginAs(UserNameAfterLogin), "Username after login is wrong.");
         }
     }
 }
