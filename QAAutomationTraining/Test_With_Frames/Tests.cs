@@ -6,7 +6,7 @@ using System;
 namespace Test_With_Frames
 {
     [TestFixture]
-    internal class Tests
+    public class Tests
     {
         private readonly string PartOfText = "Hello ";
         private readonly string PartOfTextWithBoldFont = "world!";
