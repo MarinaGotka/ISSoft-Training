@@ -25,7 +25,7 @@ namespace TUT.by
 
         public bool LoginAs(string username)
         {
-            WaitUntilDisplayed(driver, UsernameAfterlogin);
+            WaitUntilDisplayed(driver, UsernameAfterlogin); //Method with explicit waiter
 
             return driver.FindElement(UsernameAfterlogin).Text.Equals(username);
         }

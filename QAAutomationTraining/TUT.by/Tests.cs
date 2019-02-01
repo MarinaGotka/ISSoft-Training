@@ -18,7 +18,7 @@ namespace TUT.by
             driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://www.tut.by/");
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10); // Implicit waiter for WebDriver. 
         }
 
         [TearDown]
