@@ -19,7 +19,7 @@ namespace Test_With_Frames
             driver = new ChromeDriver();
             driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/iframe");
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(10); // Implicit waiter for WebDriver. 
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
         }
 
         [TearDown]
