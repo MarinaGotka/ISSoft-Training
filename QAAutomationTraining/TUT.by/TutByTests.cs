@@ -7,7 +7,7 @@ using System.Threading;
 namespace TUT.by
 {
     [TestFixture]
-    public class Tests
+    public class TutByTests
     {
         private readonly string UserNameAfterLogin = "Selenium Test";
         private IWebDriver driver;
