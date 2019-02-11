@@ -2,27 +2,38 @@
 
 namespace TUT.by
 {
-    public static class LoginPopUp
+    public class LoginPopUp : BasePage
     {
-        private static readonly By UsernameField = By.CssSelector("input[name = 'login']");
-        private static readonly By PasswordField = By.XPath("//input[@name = 'password']");
-        private static readonly By LoginButton = By.XPath("//input[contains(@type, 'submit')]");
-        private static readonly By UsernameAfterlogin = By.CssSelector("span.uname");
-        private static readonly By LogoutButton = By.XPath("//*[@id='authorize']//a[contains(@href, 'logout')]");
+        private readonly By UsernameField = By.CssSelector("input[name = 'login']");
+        private readonly By PasswordField = By.XPath("//input[@name = 'password']");
+        private readonly By LoginButton = By.XPath("//input[contains(@type, 'submit')]");
+        private readonly By UsernameAfterlogin = By.CssSelector("span.uname");
+        private readonly By LogoutButton = By.XPath("//*[@id='authorize']//a[contains(@href, 'logout')]");
+        private IWebDriver driver;
 
-        public static void Login(string username, string password)
+        public LoginPopUp(IWebDriver driver)
         {
-            HomePage.driver.FindElement(UsernameField).SendKeys(username);
-            HomePage.driver.FindElement(PasswordField).SendKeys(password);
-            HomePage.driver.FindElement(LoginButton).Click();
+            this.driver = driver;
         }
 
-        public static bool LoginAs(string username) => HomePage.driver.FindElement(UsernameAfterlogin).Text.Equals(username);
-
-        public static void Logout()
+        public void Login(string username, string password)
         {
-            HomePage.driver.FindElement(UsernameAfterlogin).Click();
-            HomePage.driver.FindElement(LogoutButton).Click();
+            driver.FindElement(UsernameField).SendKeys(username);
+            driver.FindElement(PasswordField).SendKeys(password);
+            driver.FindElement(LoginButton).Click();
+        }
+
+        public bool LoginAs(string username)
+        {
+            WaitUntilDisplayed(driver, UsernameAfterlogin); //Method with explicit waiter
+
+            return driver.FindElement(UsernameAfterlogin).Text.Equals(username);
+        }
+
+        public void Logout()
+        {
+            driver.FindElement(UsernameAfterlogin).Click();
+            driver.FindElement(LogoutButton).Click();
         }
     }
 }
