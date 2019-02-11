@@ -36,16 +36,16 @@ namespace Test_With_Frames
             Frame frame = new Frame(driver);
             frame.ClearTextArea();
 
-            Assert.True(frame.TextAreaIsCleared());
+            Assert.True(frame.TextAreaIsCleared(), "Text area isn't cleared.");
 
             frame.EnterText(PartOfText);
 
-            Assert.True(frame.TextIsEntered(PartOfText));
+            Assert.True(frame.TextIsEntered(PartOfText), "First part of text is not entered.");
 
             frame.SetBoldFont();
             frame.EnterText(PartOfTextWithBoldFont);
 
-            Assert.True(frame.TextIsBold(PartOfTextWithBoldFont));
+            Assert.True(frame.TextIsBold(PartOfTextWithBoldFont), "The second part of text is not entered with bold font.");
         }
     }
 }

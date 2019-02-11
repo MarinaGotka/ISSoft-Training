@@ -31,7 +31,7 @@ namespace Test_With_Alerts
             AlertPage alertPage = new AlertPage(driver);
             alertPage.ClickForJSAlert();
 
-            Assert.True(alertPage.JsAlertIsOKClicked());
+            Assert.True(alertPage.JsAlertIsOKClicked(), "JS Alert isn't clicked.");
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace Test_With_Alerts
             AlertPage alertPage = new AlertPage(driver);
             alertPage.ClickForJSConfirm();
 
-            Assert.True(alertPage.JsConfirmCancelIsClicked());
+            Assert.True(alertPage.JsConfirmCancelIsClicked(), "JS Confirm isn't clicked.");
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace Test_With_Alerts
             AlertPage alertPage = new AlertPage(driver);
             alertPage.ClickForJSPrompt(textForAlert);
 
-            Assert.True(alertPage.JsPromptIsClickedWithText(textForAlert));
+            Assert.True(alertPage.JsPromptIsClickedWithText(textForAlert), "JS Prompt with text isn't clicked.");
 
         }
     }
