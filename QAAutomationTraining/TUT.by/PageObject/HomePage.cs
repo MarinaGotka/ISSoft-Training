@@ -1,32 +1,44 @@
-﻿namespace TUT.by.PageObject
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+using TUT.@by.PageObject.Popup;
+
+namespace TUT.by.PageObject
 {
     public class HomePage : BasePage
     {
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='authorize']/div/a")]
-        WebElement LoginButton;
+        private IWebElement LoginButton;
 
         [FindsBy(How = How.CssSelector, Using = "span.uname")]
-        WebElement UsernameAfterlogin;
+        private IWebElement UsernameAfterlogin;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='authorize']//a[contains(@href, 'logout')]")]
-        WebElement LogoutButton;
-
+        private IWebElement LogoutButton;
 
         public HomePage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
         }
 
-        public void LogInClick() => LoginButton.Click();
+        public LoginPopUp LogInClick()
+        {
+            LoginButton.Click();
+
+            LoginPopUp loginPopUp = new LoginPopUp(driver);
+            PageFactory.InitElements(driver, loginPopUp);
+            return loginPopUp;
+        }
 
         public bool IsAt() => LoginButton.Displayed;
 
-        public void Logout()
+        public HomePage Logout()
         {
             UsernameAfterlogin.Click();
             LogoutButton.Click();
+
+            return this;
         }
     }
 }

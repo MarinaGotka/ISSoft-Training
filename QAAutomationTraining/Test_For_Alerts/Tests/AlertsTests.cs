@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using Test_For_Alerts.PageObject;
 
 namespace TTest_For_Alerts.Tests
 {

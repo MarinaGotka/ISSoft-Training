@@ -1,5 +1,11 @@
-﻿using System;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
 using System.Threading;
+using NUnit.Framework.Internal;
+using TUT.by.PageObject;
+using TUT.by.PageObject.Popup;
 
 namespace TUT.by.Tests
 {
@@ -29,8 +35,8 @@ namespace TUT.by.Tests
         [TestCase("seleniumtests2@tut.by", "123456789zxcvbn")]
         public void LoginTutByTest(string username, string password)
         {
-            HomePage homePage = PageFactory.InitElements(driver, HomePage);
-            LoginPopUp loginPopUp = PageFactory.InitElements(driver, LoginPopUp);
+            HomePage homePage = new HomePage(driver);
+            LoginPopUp loginPopUp = new LoginPopUp(driver);
 
             homePage.LogInClick();
             Thread.Sleep(1000); // Explicit wait
@@ -42,8 +48,8 @@ namespace TUT.by.Tests
         [TestCase("seleniumtests@tut.by", "123456789zxcvbn")]
         public void LogoutTutByTest(string username, string password)
         {
-            HomePage homePage = PageFactory.InitElements(driver, HomePage);
-            LoginPopUp loginPopUp = PageFactory.InitElements(driver, LoginPopUp);
+            HomePage homePage = new HomePage(driver);
+            LoginPopUp loginPopUp = new LoginPopUp(driver);
 
             homePage.LogInClick();
             Thread.Sleep(1000); // Explicit wait

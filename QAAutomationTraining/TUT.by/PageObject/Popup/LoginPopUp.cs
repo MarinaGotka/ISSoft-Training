@@ -1,20 +1,23 @@
-﻿namespace TUT.by.PageObject.Popup
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
+
+namespace TUT.by.PageObject.Popup
 {
     public class LoginPopUp : BasePage
     {
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
 
         [FindsBy(How = How.CssSelector, Using = "input[name = 'login']")]
-        WebElement UsernameField;
+        private IWebElement UsernameField;
 
         [FindsBy(How = How.XPath, Using = "//input[@name = 'password']")]
-        WebElement PasswordField;
+        private IWebElement PasswordField;
 
         [FindsBy(How = How.XPath, Using = "//input[contains(@type, 'submit')]")]
-        WebElement LoginButton;
+        private IWebElement LoginButton;
 
         [FindsBy(How = How.CssSelector, Using = "span.uname")]
-        WebElement UsernameAfterlogin;
+        private IWebElement UsernameAfterlogin;
 
 
         public LoginPopUp(IWebDriver driver) : base(driver)
