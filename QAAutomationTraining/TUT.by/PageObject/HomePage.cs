@@ -1,27 +1,32 @@
-﻿using OpenQA.Selenium;
-
-namespace TUT.by.PageObject
+﻿namespace TUT.by.PageObject
 {
     public class HomePage : BasePage
     {
-        private readonly By LoginButton = By.XPath("//*[@id='authorize']/div/a");
-        private readonly By UsernameAfterlogin = By.CssSelector("span.uname");
-        private readonly By LogoutButton = By.XPath("//*[@id='authorize']//a[contains(@href, 'logout')]");
         private IWebDriver driver;
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='authorize']/div/a")]
+        WebElement LoginButton;
+
+        [FindsBy(How = How.CssSelector, Using = "span.uname")]
+        WebElement UsernameAfterlogin;
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='authorize']//a[contains(@href, 'logout')]")]
+        WebElement LogoutButton;
+
 
         public HomePage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
         }
 
-        public void LogInClick() => driver.FindElement(LoginButton).Click();
+        public void LogInClick() => LoginButton.Click();
 
-        public bool IsAt() => driver.FindElement(LoginButton).Displayed;
+        public bool IsAt() => LoginButton.Displayed;
 
         public void Logout()
         {
-            driver.FindElement(UsernameAfterlogin).Click();
-            driver.FindElement(LogoutButton).Click();
+            UsernameAfterlogin.Click();
+            LogoutButton.Click();
         }
     }
 }

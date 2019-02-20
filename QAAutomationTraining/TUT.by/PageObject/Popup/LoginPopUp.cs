@@ -1,14 +1,21 @@
-﻿using OpenQA.Selenium;
-
-namespace TUT.by.PageObject.Popup
+﻿namespace TUT.by.PageObject.Popup
 {
     public class LoginPopUp : BasePage
     {
-        private readonly By UsernameField = By.CssSelector("input[name = 'login']");
-        private readonly By PasswordField = By.XPath("//input[@name = 'password']");
-        private readonly By LoginButton = By.XPath("//input[contains(@type, 'submit')]");
-        private readonly By UsernameAfterlogin = By.CssSelector("span.uname");
         private IWebDriver driver;
+
+        [FindsBy(How = How.CssSelector, Using = "input[name = 'login']")]
+        WebElement UsernameField;
+
+        [FindsBy(How = How.XPath, Using = "//input[@name = 'password']")]
+        WebElement PasswordField;
+
+        [FindsBy(How = How.XPath, Using = "//input[contains(@type, 'submit')]")]
+        WebElement LoginButton;
+
+        [FindsBy(How = How.CssSelector, Using = "span.uname")]
+        WebElement UsernameAfterlogin;
+
 
         public LoginPopUp(IWebDriver driver) : base(driver)
         {
@@ -17,16 +24,16 @@ namespace TUT.by.PageObject.Popup
 
         public void Login(string username, string password)
         {
-            driver.FindElement(UsernameField).SendKeys(username);
-            driver.FindElement(PasswordField).SendKeys(password);
-            driver.FindElement(LoginButton).Click();
+            UsernameField.SendKeys(username);
+            PasswordField.SendKeys(password);
+            LoginButton.Click();
         }
 
         public bool LoginAs(string username)
         {
             WaitUntilDisplayed(UsernameAfterlogin); //Method with explicit waiter
 
-            return driver.FindElement(UsernameAfterlogin).Text.Equals(username);
+            return UsernameAfterlogin.Text.Equals(username);
         }
     }
 }
