@@ -18,18 +18,18 @@ namespace TUT.by.PageObject
         {
             //Polling frequency 500 ms is added 
             var element = new WebDriverWait(clock, driver, TimeSpan.FromSeconds(15), TimeSpan.FromMilliseconds(500)).Until(condition =>
-              {
-                  try
-                  {
-                      var elementToBeDisplayed = driver.FindElement(locator);
+            {
+                try
+                {
+                    var elementToBeDisplayed = driver.FindElement(locator);
 
-                      return elementToBeDisplayed.Displayed;
-                  }
-                  catch (Exception)
-                  {
-                      return false;
-                  }
-              });
+                    return elementToBeDisplayed.Displayed;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            });
         }
     }
 }
