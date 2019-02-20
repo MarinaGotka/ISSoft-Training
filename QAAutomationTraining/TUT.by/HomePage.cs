@@ -11,7 +11,9 @@ namespace TUT.by
         {
             this.driver = driver;
         }
-
+        
         public void LogInClick() => driver.FindElement(LoginButton).Click();
+
+        public bool IsAt() => driver.FindElement(LoginButton).Displayed;
     }
 }

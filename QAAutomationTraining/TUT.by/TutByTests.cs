@@ -40,5 +40,22 @@ namespace TUT.by
 
             Assert.True(loginPopUp.LoginAs(UserNameAfterLogin), "Username after login is wrong.");
         }
+
+        [TestCase("seleniumtests@tut.by", "123456789zxcvbn")]
+        public void LogoutTutByTest(string username, string password)
+        {
+            HomePage homePage = new HomePage(driver);
+            LoginPopUp loginPopUp = new LoginPopUp(driver);
+
+            homePage.LogInClick();
+            Thread.Sleep(1000); // Explicit wait
+            loginPopUp.Login(username, password);
+
+            Assert.True(loginPopUp.LoginAs(UserNameAfterLogin), "Username after login is wrong.");
+
+            loginPopUp.Logout();
+
+            Assert.True(homePage.IsAt(), "Home page isn't opened.");
+        }
     }
 }
