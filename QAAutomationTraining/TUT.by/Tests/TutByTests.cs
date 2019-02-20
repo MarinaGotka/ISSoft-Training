@@ -3,20 +3,23 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Threading;
+using TUT.by.PageObject;
+using TUT.by.PageObject.Popup;
 
-namespace TUT.by
+namespace TUT.by.Tests
 {
     [TestFixture]
     public class TutByTests
     {
         private readonly string UserNameAfterLogin = "Selenium Test";
+        private readonly string Url = "https://www.tut.by/";
         private IWebDriver driver;
 
         [SetUp]
         public void SetUp()
         {
             driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://www.tut.by/");
+            driver.Navigate().GoToUrl(Url);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15); // Implicit waiter for WebDriver. 
         }
@@ -53,7 +56,7 @@ namespace TUT.by
 
             Assert.True(loginPopUp.LoginAs(UserNameAfterLogin), "Username after login is wrong.");
 
-            loginPopUp.Logout();
+            homePage.Logout();
 
             Assert.True(homePage.IsAt(), "Home page isn't opened.");
         }

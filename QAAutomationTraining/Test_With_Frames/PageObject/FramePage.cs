@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Test_With_Frames
+namespace Test_With_Frames.PageObject
 {
     public class Frame
     {

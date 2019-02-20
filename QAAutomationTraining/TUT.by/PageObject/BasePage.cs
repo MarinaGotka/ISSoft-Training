@@ -2,13 +2,19 @@
 using OpenQA.Selenium.Support.UI;
 using System;
 
-namespace TUT.by
+namespace TUT.by.PageObject
 {
     public class BasePage
     {
         private readonly IClock clock = new SystemClock();
+        private IWebDriver driver;
 
-        public void WaitUntilDisplayed(IWebDriver driver, By locator)
+        public BasePage(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
+
+        public void WaitUntilDisplayed(By locator)
         {
             //Polling frequency 500 ms is added 
             var element = new WebDriverWait(clock, driver, TimeSpan.FromSeconds(15), TimeSpan.FromMilliseconds(500)).Until(condition =>
