@@ -23,6 +23,7 @@ namespace TUT.by.PageObject.Popup
         public LoginPopUp(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
+            PageFactory.InitElements(driver, this);
         }
 
         public void Login(string username, string password)

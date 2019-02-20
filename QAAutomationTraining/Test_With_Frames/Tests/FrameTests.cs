@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using Test_With_Frames.PageObject;
 
 namespace Test_With_Frames.Tests
 {

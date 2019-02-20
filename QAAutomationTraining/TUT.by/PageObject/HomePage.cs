@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using TUT.@by.PageObject.Popup;
 
 namespace TUT.by.PageObject
 {
@@ -20,25 +19,20 @@ namespace TUT.by.PageObject
         public HomePage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
+            PageFactory.InitElements(driver, this);
         }
 
-        public LoginPopUp LogInClick()
+        public void LogInClick()
         {
             LoginButton.Click();
-
-            LoginPopUp loginPopUp = new LoginPopUp(driver);
-            PageFactory.InitElements(driver, loginPopUp);
-            return loginPopUp;
         }
 
         public bool IsAt() => LoginButton.Displayed;
 
-        public HomePage Logout()
+        public void Logout()
         {
             UsernameAfterlogin.Click();
             LogoutButton.Click();
-
-            return this;
         }
     }
 }
