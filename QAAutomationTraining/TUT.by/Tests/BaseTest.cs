@@ -1,0 +1,36 @@
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+using System.IO;
+
+namespace TUT.by.Tests
+{
+    public class BaseTest
+    {
+        private readonly string Url = "https://www.tut.by/";
+        public IWebDriver driver;
+
+        [SetUp]
+        public void SetUp()
+        {
+            driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Url);
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15); // Implicit waiter for WebDriver. 
+            TakeScreenshot();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            driver.Quit();
+        }
+
+        public void TakeScreenshot()
+        {
+            Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+            screenshot.SaveAsFile(Path.Combine(Environment.CurrentDirectory, "Screenshot " + TestContext.CurrentContext.Test.MethodName.ToString()), ScreenshotImageFormat.Jpeg);
+        }
+    }
+}

@@ -62,6 +62,7 @@
     <Compile Include="PageObject\BasePage.cs" />
     <Compile Include="PageObject\HomePage.cs" />
     <Compile Include="PageObject\Popup\LoginPopUp.cs" />
+    <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Tests\TutByTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
