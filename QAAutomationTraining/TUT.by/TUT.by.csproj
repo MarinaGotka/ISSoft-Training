@@ -59,10 +59,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasePage.cs" />
-    <Compile Include="HomePage.cs" />
-    <Compile Include="LoginPopUp.cs" />
-    <Compile Include="TutByTests.cs" />
+    <Compile Include="PageObject\BasePage.cs" />
+    <Compile Include="PageObject\HomePage.cs" />
+    <Compile Include="PageObject\Popup\LoginPopUp.cs" />
+    <Compile Include="Tests\TutByTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

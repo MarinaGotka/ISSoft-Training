@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 
-namespace Test_With_Alerts
+namespace TTest_For_Alerts.Tests
 {
     [TestFixture]
     public class AlertsTests

@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Test_With_Alerts
+namespace Test_For_Alerts.PageObject
 {
     public class AlertPage
     {

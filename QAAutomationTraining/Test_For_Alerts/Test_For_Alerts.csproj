@@ -52,8 +52,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlertPage.cs" />
-    <Compile Include="AlertsTests.cs" />
+    <Compile Include="PageObject\AlertPage.cs" />
+    <Compile Include="Tests\AlertsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

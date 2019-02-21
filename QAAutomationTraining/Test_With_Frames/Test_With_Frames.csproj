@@ -57,9 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FramePage.cs" />
+    <Compile Include="PageObject\FramePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FrameTests.cs" />
+    <Compile Include="Tests\FrameTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
