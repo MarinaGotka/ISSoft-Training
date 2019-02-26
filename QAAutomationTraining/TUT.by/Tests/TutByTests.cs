@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Threading;
+using NUnit.Framework.Internal;
 using TUT.by.PageObject;
 using TUT.by.PageObject.Popup;
 
