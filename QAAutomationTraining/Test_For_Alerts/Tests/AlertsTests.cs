@@ -1,9 +1,6 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
+﻿using System;
 
-namespace Test_With_Alerts
+namespace TTest_For_Alerts.Tests
 {
     [TestFixture]
     public class AlertsTests
@@ -52,7 +49,6 @@ namespace Test_With_Alerts
             alertPage.ClickForJSPrompt(textForAlert);
 
             Assert.True(alertPage.JsPromptIsClickedWithText(textForAlert), "JS Prompt with text isn't clicked.");
-
         }
     }
 }

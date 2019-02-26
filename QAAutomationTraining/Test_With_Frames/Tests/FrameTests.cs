@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 
-namespace Test_With_Frames
+namespace Test_With_Frames.Tests
 {
     [TestFixture]
     public class FrameTests
