@@ -6,10 +6,17 @@ using TUT.by.PageObject.Popup;
 
 namespace TUT.by.Tests
 {
-    [TestFixture]
+
+    [TestFixture("Windows 10", "Microsoft Edge","18")]
+    [TestFixture("Windows 8.1", "Mozilla Firefox", "39.0")]
+    [TestFixture("Linux", "Google Chrome", "40")]
     public class TutByTests : BaseTest
     {
         private readonly string UserNameAfterLogin = "Selenium Test";
+
+        public TutByTests(string os, string browser, string version) : base(os, browser, version)
+        {
+        }
 
         [TestCase("seleniumtests@tut.by", "123456789zxcvbn")]
         [TestCase("seleniumtests2@tut.by", "123456789zxcvbn")]
