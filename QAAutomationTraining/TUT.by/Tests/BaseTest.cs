@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Allure.Commons;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -6,7 +7,7 @@ using System.IO;
 
 namespace TUT.by.Tests
 {
-    public class BaseTest
+    public class BaseTest : AllureReport
     {
         private readonly string Url = "https://www.tut.by/";
         public IWebDriver driver;
@@ -18,12 +19,16 @@ namespace TUT.by.Tests
             driver.Navigate().GoToUrl(Url);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15); // Implicit waiter for WebDriver. 
-            TakeScreenshot();
         }
 
         [TearDown]
         public void TearDown()
         {
+            if (TestContext.Out == TestContext.Error)
+            {
+                TakeScreenshot();
+            }
+
             driver.Quit();
         }
 
