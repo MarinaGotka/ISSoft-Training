@@ -5,6 +5,13 @@ namespace GMail_FinalTask.PageObject
 {
     public class LoginPage : BasePage
     {
+        private readonly By passwordTextField = By.XPath("//input[@type = 'password']");
+        private readonly By usernameTextField = By.XPath("//input[@type = 'email']");
+        private readonly By nextButton = By.XPath("//*[contains(@id,'Next')]");
+        private readonly By profileIdentifier = By.CssSelector("#profileIdentifier");
+        private readonly By useAnotherAccoutnButton = By.XPath("//div[@class][contains(text(),'Use another account')]");
+        private readonly By lastMessage = By.XPath("//tr[@class = 'zA zE']//span[@class = 'y2']");
+
         [FindsBy(How = How.XPath, Using = "//input[@type = 'email']")]
         private readonly IWebElement UsernameTextField;
 
@@ -14,15 +21,35 @@ namespace GMail_FinalTask.PageObject
         [FindsBy(How = How.XPath, Using = "//*[contains(@id,'Next')]")]
         private readonly IWebElement NextButton;
 
-        public bool IsAt() => NextButton.Displayed;
+        public bool IsAt() => nextButton.WaitUntilVisible().Displayed;
 
         public void Login(string username, string password)
         {
-            UsernameTextField.SendKeys(username);
+            if (passwordTextField.IsDisplayed())
+            {
+                UseAnotherAccount();
+            }
+            else if (!usernameTextField.IsDisplayed())
+            {
+                ClickUseAnotherAccount();
+            }
+
+            usernameTextField.WaitUntilVisible().SendKeys(username);
             NextButton.Click();
-            PasswordTextField.SendKeys(password);
+            passwordTextField.WaitUntilVisible().SendKeys(password);
             NextButton.Click();
             (new HomePage()).WaitLoadingPage();
+        }
+
+        public void UseAnotherAccount()
+        {
+            profileIdentifier.WaitUntilVisible().Click();
+            useAnotherAccoutnButton.WaitUntilVisible().Click();
+        }
+
+        public void ClickUseAnotherAccount()
+        {
+            useAnotherAccoutnButton.WaitUntilVisible().Click();
         }
     }
 }

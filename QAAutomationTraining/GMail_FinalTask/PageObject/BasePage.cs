@@ -1,8 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using GMail_FinalTask.WebDriver;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
-using System;
-using GMail_FinalTask.WebDriver;
 
 namespace GMail_FinalTask.PageObject
 {
@@ -15,12 +14,9 @@ namespace GMail_FinalTask.PageObject
             PageFactory.InitElements(DriverFactory.GetDriver(), this);
         }
 
-        public IWebElement WaitUntilVisible(this By locator, int secondsToWait = 15)
+        public void WaitUntilDisplayed(By locator)
         {
-            var wait = new WebDriverWait(DriverFactory.GetDriver(), TimeSpan.FromSeconds(secondsToWait));
-            wait.Until(ElementIsVisible(locator));
-
-            return DriverFactory.GetDriver().FindElement(locator);
-        }
+            WebElementExtensions.WaitUntilVisible(locator);
+        }    
     }
 }
